@@ -1,0 +1,81 @@
+import java.util.ArrayList;
+import java.util.List;
+// import java.util.logging.Logger;
+
+public class CustomsSystem {
+    private final List<Shipment> shipments;
+    private final List<CustomsOfficer> officers;
+    // List(Declaration) can be added if needed
+    private final List<Item> items;
+    
+    
+    public CustomsSystem() {
+        this.shipments = new ArrayList<>();
+        this.officers = new ArrayList<>();
+        this.items = new ArrayList<>();
+    }
+
+    public void registerShipment(Shipment shipment) {
+        shipments.add(shipment);
+    }
+
+    public void registerOfficer(CustomsOfficer officer) {
+        officers.add(officer);
+    }
+
+    public Shipment findShipmentById(String shipmentId) {
+        for (Shipment shipment : shipments) {
+            if (shipment.getShipmentId().equals(shipmentId)) {
+                return shipment;
+            }
+        }
+        return null;
+    }
+
+    public void displayAllShipments() {
+        for (Shipment shipment : shipments) {
+            System.out.println(shipment);
+        }
+    }
+
+    public CustomsOfficer findOfficerById(String officerId) {
+        for (CustomsOfficer officer : officers) {
+            if (officer.getOfficerId().equals(officerId)) {
+                return officer;
+            }
+        }
+        return null;
+    }
+
+    public void displayAllOfficers() {
+        for (CustomsOfficer officer : officers) {
+            System.out.println(officer);
+        }
+    }
+
+    public void processShipment(String shipmentId, String officerId) {
+        Shipment shipment = findShipmentById(shipmentId);
+        CustomsOfficer officer = findOfficerById(officerId);
+        if (shipment != null && officer != null) {
+            officer.approveShipment(shipment);
+        } else {
+            System.out.println("Shipment or Officer not found.");
+        }
+    }
+
+    public void generateReport() {
+        System.out.println("Customs System Report:");
+        System.out.println("Total Shipments: " + shipments.size());
+        System.out.println("Total Officers: " + officers.size());
+    }
+
+    public double calculateTotalDuty(DutyCalculator calculator) {
+        double total = 0.0;
+
+        for (Item item : items) {
+            Duty duty = calculator.calculate(item);
+            total += duty.getAmount();
+        }
+        return total;
+    }
+}
