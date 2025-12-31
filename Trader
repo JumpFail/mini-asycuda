@@ -1,0 +1,38 @@
+public class Trader {
+    private final String tinNumber;
+    private String traderName;
+    private String country;
+    public enum TraderType { IMPORTER, EXPORTER, BROKER }
+    private TraderType traderType;
+
+    public Trader(String tinNumber, String traderName, String country, TraderType traderType) {
+        this.tinNumber = tinNumber;
+        this.traderName = traderName;
+        this.country = country;
+        this.traderType = traderType;
+    }
+
+    public String getTinNumber() {
+        return tinNumber;
+    }
+    public String getTraderName() {
+        return traderName;
+    }
+    public void setTraderName(String traderName) {
+        this.traderName = traderName;
+    }
+    public String getCountry() {
+        return country;
+    }
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    public TraderType getTraderType() {
+        return traderType;
+    }
+    public void setTraderType(TraderType traderType) {
+        this.traderType = traderType;
+    }
+}
+
+// Trader types
